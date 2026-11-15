@@ -6,6 +6,12 @@ disable-model-invocation: true
 
 # Architect
 
+## Orchestration backend
+
+Before resolving models or delegating, monitoring, cancelling, or recovering workers, read [0xStack orchestration](../0xstack-orchestration/SKILL.md) when installed. It selects the backend once for this task. In native mode, follow this skill unchanged. In T3 or Orca mode, its backend-specific model configuration and execution lifecycle replace the native tool, model-file, fallback, wait, retry, and cancellation instructions below. Keep this skill's roles, panel rules, prompts, workflow, and acceptance criteria. Backend recovery takes precedence over a playbook's instruction to replace a stalled worker.
+
+If the companion skill is absent, this skill retains its original native behavior. An explicit T3 or Orca request requires installing the companion instead of silently running native.
+
 Sketch types, function signatures, class shapes, and module boundaries with `not implemented` bodies and pseudocode. Synthesize across multiple model perspectives, then fill in code against the chosen sketch.
 
 ## Start

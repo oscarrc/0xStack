@@ -1,5 +1,7 @@
 # pstack in Claude Code
 
+These mappings apply to the native orchestration backend. When [0xStack orchestration](../../skills/0xstack-orchestration/SKILL.md) selects T3 or Orca, use that backend's execution targets, option schemas, and lifecycle instead. Native model rules loaded into context do not override backend-specific role assignments. All other Claude Code mappings still apply.
+
 pstack skills use Cursor names. In Claude Code, read this file once per session, then map each Cursor name in a skill with the tables below. `<pstack>` means the folder that holds `skills/` and `docs/`. If a Cursor field has no row, drop it and say so. Never pass a field or value the tool schema rejects.
 
 ## Tools

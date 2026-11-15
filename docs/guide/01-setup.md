@@ -64,3 +64,7 @@ Watch the todo list. Its first items are the matched playbook's steps copied in,
 From here you can type normal follow-ups. To keep `/poteto-mode` on for the whole chat, pick it from the `/` menu with Option+Enter (Mac) or Alt+Enter (Windows) instead of Enter. That makes it a [Custom Mode](https://cursor.com/docs/skills#using-a-skill-as-a-custom-mode), which stays in context on every turn until you exit it. Custom Modes are available in the Agents Window and the CLI. Plain Enter attaches the skill to one message, and it fades as the chat moves on.
 
 Next: [Route work through `/poteto-mode`](./02-poteto-mode.md).
+
+## Select an orchestration backend
+
+The original setup above configures native agent tools. Install the `0xstack-orchestration` companion with 0xStack to also use T3 Code or Orca IDE. `/setup-pstack` resolves the current backend, and `/setup-pstack native` always uses the original settings. T3 and Orca each have independent role assignments and reasoning budgets. Existing native settings need no migration. See [orchestration setup](../orchestration.md) before configuring a new backend.

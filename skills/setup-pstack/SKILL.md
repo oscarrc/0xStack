@@ -5,6 +5,16 @@ description: Configure which models pstack uses per role and at what reasoning b
 
 # Setup pstack
 
+## Select the configuration backend
+
+Read [0xStack orchestration](../0xstack-orchestration/SKILL.md) when installed. Resolve the requested backend before detecting models or writing settings. With no explicit selection, configure the currently detected backend. Ask when auto is ambiguous. `auto` selects a backend and has no model file of its own.
+
+For `native`, follow every original step below, including the harness-specific paths and Claude Code's legacy fallback. For `t3` or `orca`, follow the companion's [configuration workflow](../0xstack-orchestration/references/configuration.md) instead of the native steps below. Preserve all role labels, panel lists, aliases, budgets, and effort policy. Each backend writes only its own file. Re-running setup preserves assignments. Unavailable models remain on disk until a replacement is confirmed.
+
+Support requests to view all backend configurations, edit an individual role, change one backend's budget, reset one backend, or save an explicit orchestration mode and preference. Viewing is read-only. Native files keep their existing format. Never rewrite them while configuring T3 or Orca.
+
+If the companion is absent, native setup remains available unchanged. Explicit T3 or Orca setup requires the companion and never falls back to editing native settings.
+
 Write pstack's model settings, one model per role:
 
 - **Cursor:** `~/.cursor/rules/pstack-models.mdc`, an always-applied rule.

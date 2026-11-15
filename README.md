@@ -1,49 +1,45 @@
-<!-- mirror:start — this top section is specific to the mirror. Everything after mirror:end is the upstream README from cursor/plugins/pstack, unchanged. To sync with upstream, follow MIRROR.md. -->
-<h1 align="center">pstack — standalone mirror</h1>
+<!-- mirror:start — this top section is specific to 0xStack. Everything after mirror:end is the upstream README from cursor/plugins/pstack, unchanged. -->
+<h1 align="center">0xStack</h1>
 
 <p align="center">
-  <a href="https://github.com/cursor/plugins/tree/main/pstack">
-    <picture>
-      <source media="(prefers-color-scheme: dark)" srcset="mirror-assets/header-dark.svg">
-      <img src="mirror-assets/header-light.svg" width="100%" alt="cursor/plugins/pstack is kept in sync with this mirror, backnotprop/pstack. npx skills add backnotprop/pstack installs it into Claude Code, Codex, Pi, Cursor, OpenCode, and other agents.">
-    </picture>
-  </a>
+  A fork of <a href="https://github.com/backnotprop/pstack">backnotprop/pstack</a>, the standalone mirror of <a href="https://github.com/cursor/plugins/tree/main/pstack">cursor/plugins/pstack</a> by Poteto, with T3 Code and Orca orchestration backends.
 </p>
 
-<p align="center">
-  <b>Mirror</b> of cursor/plugins/pstack by Poteto — kept in sync for standalone use. Sponsored by Plannotator.
-</p>
+## Syncing with upstream
 
-<p align="center">
-  <a href="https://github.com/backnotprop/plannotator"><picture>
-    <source media="(prefers-color-scheme: dark)" srcset="mirror-assets/sponsor-plannotator-dark.svg">
-    <img src="mirror-assets/sponsor-plannotator-light.svg" width="48%" alt="Sponsored by Plannotator">
-  </picture></a>
-  <a href="https://plannotator.ai/inbox/"><picture>
-    <source media="(prefers-color-scheme: dark)" srcset="mirror-assets/sponsor-inbox-dark.svg">
-    <img src="mirror-assets/sponsor-inbox-light.svg" width="48%" alt="Try Plannotator Inbox today">
-  </picture></a>
-</p>
+Skills that come from pstack keep their upstream names (for example `setup-pstack`) so upstream changes merge cleanly. To pull them in:
 
-<p align="center">
-  Poteto's Bro Skill was created by me, <a href="https://github.com/backnotprop/bro">backnotprop/bro</a>
-</p>
+```bash
+git remote add upstream https://github.com/backnotprop/pstack.git  # once
+git fetch upstream
+git merge upstream/main
+```
+
+`MIRROR.md` and `SYNC-LOG.md` are upstream's own sync notes and are kept as they arrive.
 
 ## Install
 
-pstack is a folder of plain [Agent Skills](https://agentskills.io) (`skills/<name>/SKILL.md`). You don't need [Cursor](https://github.com/cursor/plugins/tree/main/pstack). The [`skills` CLI](https://skills.sh) installs them into Claude Code, Codex, Pi, Cursor, OpenCode, and other agents:
+0xStack is a folder of plain [Agent Skills](https://agentskills.io) (`skills/<name>/SKILL.md`). You don't need [Cursor](https://github.com/cursor/plugins/tree/main/pstack). The [`skills` CLI](https://skills.sh) installs them into Claude Code, Codex, Pi, Cursor, OpenCode, and other agents:
 
 ```bash
-npx skills add backnotprop/pstack
+npx skills add oscarrc/0xStack
 ```
 
 The CLI shows every skill in a list you can search. Select the skills you want, then select your agents.
+
+## Orchestration backends
+
+0xStack supports native agent delegation, T3 Code, and Orca IDE. The default `auto` mode detects usable orchestration environments and otherwise keeps native behavior. Include `0xstack-orchestration` alongside delegation skills when selecting skills during installation. Existing native-only installations continue to work.
+
+Use `/setup-pstack t3`, `/setup-pstack orca`, or `/setup-pstack native` to configure independent model assignments. Start a task with `/poteto-mode use native orchestration` to force the original harness behavior. T3 and Orca settings never replace native model files. New backend helpers require Node 18 or newer.
+
+See [orchestration setup, usage, and troubleshooting](docs/orchestration.md) for detection rules, provider discovery, isolation, recovery, and current limitations.
 
 ## Skills
 
 Cursor's original README is [further down this page](#pstack).
 
-These skills don't call other pstack skills, so each one works alone:
+These skills don't call other skills, so each one works alone:
 
 `unslop`, `bro`, `how`, `tdd`, `typescript-best-practices`, `arena`, `swarm`, `interrogate`, `reflect`, `show-me-your-work`, `figure-it-out`, `automate-me`, `correct`, `benchmark-checklist`, `in-your-own-words`, `sharpen`, `statechart`
 
@@ -65,11 +61,11 @@ Some skills call other skills. Install these together:
 
 Skills that spawn subagents point to the Subagents section of `poteto-mode` to pick each subagent's effort. Without `poteto-mode`, they use the default effort.
 
-## What this mirror changes
+## What 0xStack changes
 
 Many skills were Cursor-specific. They've been rewritten to work in any harness.
 
-The mirror also carries two community fixes that aren't upstream yet:
+It also carries two community fixes that aren't upstream yet:
 
 - `no-comments` keeps a comment about an outside rule (a dependency, platform, or protocol) when it can't check the rule, and marks it for review instead of deleting it. A rejected review no longer stops the whole run. ([#14](https://github.com/backnotprop/pstack/issues/14))
 - `statechart` runs on Windows: it no longer needs `/bin/sh`, reads TLC output with Windows line endings, and cleans up its temp folder after a killed run. Patch by [@yasuyuki](https://github.com/yasuyuki). ([#17](https://github.com/backnotprop/pstack/issues/17))
